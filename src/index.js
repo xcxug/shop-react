@@ -1,8 +1,11 @@
+import 'babel-polyfill'; // es6转es5兼容ie
+import 'url-search-params-polyfill'; // 让ie支持new URLSearchParams()
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import './assets/js/libs/zepto.js';
+import './assets/css/common/public.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

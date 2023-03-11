@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+/*
+  HashRouter：有#号
+  BrowserRouter：没有#号
+  Switch：只要匹配到一个地址不往下匹配，相当于for循环里面的break
+  Link：跳转页面，相当于vue里面的router-link
+  exact：完全匹配路由
+*/
+import React, { Component, Fragment } from 'react';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+// import {PrivateRoute} from './routes/private';
+import asyncComponents from './components/async/AsyncComponent';
+const IndexComponent = asyncComponents(() => import('./pages/home/index/index'));
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Fragment>
+        <Router>
+          <Fragment>
+            <Routes>
+              <Route exact path="/" element={<IndexComponent />} ></Route>
+            </Routes>
+          </Fragment>
+        </Router>
+      </Fragment>
+    );
+  }
 }
 
 export default App;
