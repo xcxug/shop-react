@@ -6,7 +6,7 @@
   exact：完全匹配路由
 */
 import React, { Component, Fragment } from 'react';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 // import {PrivateRoute} from './routes/private';
 import asyncComponents from './components/async/AsyncComponent';
 const IndexComponent = asyncComponents(() => import('./pages/home/index/index'));
@@ -17,9 +17,9 @@ class App extends Component {
       <Fragment>
         <Router>
           <Fragment>
-            <Routes>
-              <Route exact path="/" element={<IndexComponent />} ></Route>
-            </Routes>
+            <Switch>
+              <Route exact path="/" component={IndexComponent} ></Route>
+            </Switch>
           </Fragment>
         </Router>
       </Fragment>
