@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 class IndexComponent extends Component {
     render() {
         return (
-            <div class="app">
-                首页
+            <div>
+                我的
             </div>
         );
     }
