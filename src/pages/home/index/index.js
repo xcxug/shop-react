@@ -25,7 +25,8 @@ class IndexComponent extends Component {
         this.getNav();
         this.getGoodsLevel();
         this.getReco();
-        window.addEventListener("scroll", this.eventScroll.bind(this), false);
+
+        window.addEventListener("scroll", this.eventScroll.bind(this));
     }
 
     componentWillUnmount() {
