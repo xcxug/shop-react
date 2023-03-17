@@ -1,5 +1,6 @@
 import 'babel-polyfill'; // es6转es5兼容ie
 import 'url-search-params-polyfill'; // 让ie支持new URLSearchParams()
+import 'whatwg-fetch'; // 让ie支持fetch()请求接口
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';

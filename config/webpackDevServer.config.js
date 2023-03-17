@@ -100,7 +100,16 @@ module.exports = function (proxy, allowedHost) {
       index: paths.publicUrlOrPath,
     },
     // `proxy` is run between `before` and `after` `webpack-dev-server` hooks
-    proxy,
+    // proxy,
+    proxy: { // 解决本地开发跨域问题
+      "/proxy": {
+        "target": "http://vueshop.glbuys.com",
+        "changeOrigin": "true",
+        "pathRewrite": {
+          "^/proxy": ""
+        }
+      }
+    },
     onBeforeSetupMiddleware(devServer) {
       // Keep `evalSourceMapMiddleware`
       // middlewares before `redirectServedPath` otherwise will not have any effect

@@ -1,5 +1,5 @@
-let prodUrl = "http://vueshop.glbuys.com";
-let devUrl = "http://vueshop.glbuys.com";
+let prodUrl = "http://vueshop.glbuys.com"; // 生产环境
+let devUrl = "http://vueshop.glbuys.com"; // 开发者环境
 let baseUrl = process.env.NODE_ENV === 'development' ? devUrl : prodUrl;
 
 const exportedObject = {
