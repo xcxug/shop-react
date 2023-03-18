@@ -52,6 +52,7 @@
 .bottom-nav ul li.text {
   font-size: 0.6rem;
   text-align: center;
+  width: auto;
 }
 
 .bottom-nav ul li.text.active {
