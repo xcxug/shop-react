@@ -92,6 +92,11 @@ class GoodsClassify extends Component {
         this.setState({ aClassify: this.aTempClassify });
     }
 
+    componentWillUnmount() {
+        let oScrollClassify = document.getElementById("scroll-classify");
+        oScrollClassify.removeEventListener('touchmove', function (e) { e.preventDefault(); });
+    }
+
     render() {
         return (
             <div>

@@ -50,6 +50,11 @@ class GoodsItems extends Component {
         });
     }
 
+    componentWillUnmount() {
+        let goodsContentMain = document.getElementById("goods-content-main");
+        goodsContentMain.removeEventListener('touchmove', function (e) { e.preventDefault(); });
+    }
+
     render() {
         return (
             <div id="goods-content-main" className={Css['goods-content-main']}>
