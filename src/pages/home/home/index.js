@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import asyncComponents from '../../../components/async/AsyncComponent';
 import config from '../../../assets/js/conf/config.js';
@@ -61,13 +61,13 @@ class HomeComponent extends Component {
     render() {
         return (
             <div>
-                <React.Fragment>
+                <Fragment>
                     <Switch>
                         <Route path={config.path + "home/index"} component={IndexComponent} ></Route>
                         <Route path={config.path + "home/cart"} component={CartIndex} ></Route>
                         <Route path={config.path + "home/my"} component={UserIndex} ></Route>
                     </Switch>
-                </React.Fragment>
+                </Fragment>
                 <div className={Css['bottom-nav']}>
                     <ul onClick={this.goPage.bind(this, 'home/index')}>
                         <li className={this.state.bHomeStyle ? Css['home'] + " " + Css['active'] : Css['home']}></li>
