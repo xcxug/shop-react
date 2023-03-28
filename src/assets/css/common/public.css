@@ -104,3 +104,11 @@ body {
     font-size: 0.8rem;
     text-align: center;
 }
+
+.am-modal-body {
+    color: #000000 !important;
+}
+
+.hide {
+    display: none;
+}

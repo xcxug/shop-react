@@ -6,6 +6,7 @@ import IScroll from '../../../assets/js/libs/iscroll.js';
 import Css from '../../../assets/css/home/goods/classify.module.css';
 import { request } from "../../../assets/js/libs/request";
 import { localParam } from "../../../assets/js/utils/util";
+import SearchComponent from '../../../components/search/search';
 const GoodsItems = asyncComponents(() => import('./items'));
 
 class GoodsClassify extends Component {
@@ -13,7 +14,8 @@ class GoodsClassify extends Component {
         super(props);
 
         this.state = {
-            aClassify: []
+            aClassify: [],
+            pageStyle: { display: "none" }
         };
         this.myScroll = null;
         this.aTempClassify = [];
@@ -97,12 +99,20 @@ class GoodsClassify extends Component {
         oScrollClassify.removeEventListener('touchmove', function (e) { e.preventDefault(); });
     }
 
+    changeSearch() {
+        this.setState({ pageStyle: { display: "block" } });
+    }
+
+    getStyle(val) {
+        this.setState({ pageStyle: val });
+    }
+
     render() {
         return (
             <div>
                 <div className={Css['search-header']}>
                     <div className={Css['back']} onClick={this.goBack.bind(this)}></div>
-                    <div className={Css['search']}>请输入宝贝名称</div>
+                    <div className={Css['search']} onClick={this.changeSearch.bind(this)}>请输入宝贝名称</div>
                 </div>
                 <div className={Css['goods-main']}>
                     <div id="scroll-classify" className={Css['classify-wrap']}>
@@ -124,6 +134,7 @@ class GoodsClassify extends Component {
                         </Switch>
                     </div>
                 </div>
+                <SearchComponent pageStyle={this.state.pageStyle} childStyle={this.getStyle.bind(this)}></SearchComponent>
             </div>
         );
     }

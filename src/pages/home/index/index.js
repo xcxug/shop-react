@@ -5,6 +5,7 @@ import { request } from '../../../assets/js/libs/request.js';
 import { lazyImg } from '../../../assets/js/utils/util.js';
 import "../../../assets/css/common/swiper.min.css";
 import Css from '../../../assets/css/home/index/index.module.css';
+import SearchComponent from '../../../components/search/search';
 
 class IndexComponent extends Component {
     constructor(props) {
@@ -15,7 +16,8 @@ class IndexComponent extends Component {
             aNav: [],
             aGoods: [],
             aRecoGoods: [],
-            bScroll: false
+            bScroll: false,
+            pageStyle: { display: "none" }
         }
         this.bScroll = true;
     }
@@ -91,12 +93,20 @@ class IndexComponent extends Component {
         this.props.history.push(config.path + pUrl)
     }
 
+    changeSearch() {
+        this.setState({ pageStyle: { display: "block" } });
+    }
+
+    getStyle(val) {
+        this.setState({ pageStyle: val });
+    }
+
     render() {
         return (
             <div className={Css['page']}>
                 <div className={this.state.bScroll ? Css['search-header'] + " " + Css["red-bg"] : Css['search-header']}>
                     <div className={Css['classify-icon']} onClick={this.pushPage.bind(this, "goods/classify/items")}></div>
-                    <div className={Css['search-wrap']}>
+                    <div className={Css['search-wrap']} onClick={this.changeSearch.bind(this)}>
                         <div className={Css['search-icon']}></div>
                         <div className={Css['search-text']}>请输入宝贝名称</div>
                     </div>
@@ -218,6 +228,7 @@ class IndexComponent extends Component {
                             : ''
                     }
                 </div>
+                <SearchComponent pageStyle={this.state.pageStyle} childStyle={this.getStyle.bind(this)}></SearchComponent>
             </div>
         );
     }
