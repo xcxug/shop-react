@@ -12,6 +12,7 @@ import asyncComponents from './components/async/AsyncComponent';
 import config from './assets/js/conf/config.js';
 const HomeComponent = asyncComponents(() => import('./pages/home/home/index'));
 const GoodsClassify = asyncComponents(() => import('./pages/home/goods/classify'));
+const GoodsSearch = asyncComponents(() => import('./pages/home/goods/search'));
 
 class App extends Component {
   render() {
@@ -22,6 +23,7 @@ class App extends Component {
             <Switch>
               <Route path={config.path + "home"} component={HomeComponent} ></Route>
               <Route path={config.path + "goods/classify"} component={GoodsClassify} ></Route>
+              <Route path={config.path + "goods/search"} component={GoodsSearch} ></Route>
               <Redirect to={config.path + "home/index"}></Redirect>
             </Switch>
           </Fragment>
