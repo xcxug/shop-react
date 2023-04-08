@@ -113,3 +113,8 @@ body {
 .hide {
     display: none;
 }
+
+.height-hide {
+    height: 0px;
+    overflow: hidden;
+}

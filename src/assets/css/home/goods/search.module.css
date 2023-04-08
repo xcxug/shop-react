@@ -94,7 +94,7 @@
   font-size: 0.32rem;
 }
 
-.search-top .order-main .order-item .order-text.active {
+.search-top .order-main .order-item.active .order-text {
   color: #FDA208;
 }
 
@@ -108,7 +108,7 @@
   margin-left: 0.1rem;
 }
 
-.search-top .order-main .order-item .order-icon.up {
+.search-top .order-main .order-item.active .order-icon {
   background-image: url("../../../../assets/images/home/goods/up.png");
   background-size: 100%;
   background-position: center;
