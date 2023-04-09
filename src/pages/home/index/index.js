@@ -51,7 +51,7 @@ class IndexComponent extends Component {
         request(config.baseUrl + "/api/home/index/slide?token=" + config.token).then(res => {
             if (res.code === 200) {
                 this.setState({ aSwiper: res.data }, () => {
-                    new Swiper("." + Css['swiper-wrap'], {
+                    new Swiper(this.refs['swiper-wrap'], {
                         autoplay: 3000,
                         pagination: '.swiper-pagination',
                         autoplayDisableOnInteraction: false
@@ -114,7 +114,7 @@ class IndexComponent extends Component {
                         <div className={Css['login-text']}>登录</div>
                     </div>
                 </div>
-                <div className={Css['swiper-wrap']}>
+                <div ref="swiper-wrap" className={Css['swiper-wrap']}>
                     <div className="swiper-wrapper">
                         {
                             this.state.aSwiper != null ?

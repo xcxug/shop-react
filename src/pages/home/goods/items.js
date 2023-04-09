@@ -41,9 +41,9 @@ class GoodsItems extends Component {
     }
 
     eventScroll() {
-        let goodsContentMain = document.getElementById("goods-content-main");
+        let goodsContentMain = this.refs['goods-content-main'];
         goodsContentMain.addEventListener('touchmove', function (e) { e.preventDefault(); });
-        this.myScroll = new IScroll('#goods-content-main', {
+        this.myScroll = new IScroll(goodsContentMain, {
             scrollX: false,
             scrollY: true,
             preventDefault: false
@@ -51,13 +51,13 @@ class GoodsItems extends Component {
     }
 
     componentWillUnmount() {
-        let goodsContentMain = document.getElementById("goods-content-main");
+        let goodsContentMain = this.refs['goods-content-main'];
         goodsContentMain.removeEventListener('touchmove', function (e) { e.preventDefault(); });
     }
 
     render() {
         return (
-            <div id="goods-content-main" className={Css['goods-content-main']}>
+            <div ref="goods-content-main" className={Css['goods-content-main']}>
                 <div>
                     {
                         this.state.aGoods.length > 0 ?

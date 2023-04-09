@@ -35,9 +35,9 @@ class GoodsClassify extends Component {
     }
 
     eventScroll() {
-        let oScrollClassify = document.getElementById("scroll-classify");
+        let oScrollClassify = this.refs["scroll-classify"];
         oScrollClassify.addEventListener('touchmove', function (e) { e.preventDefault(); });
-        this.myScroll = new IScroll('#scroll-classify', {
+        this.myScroll = new IScroll(oScrollClassify, {
             scrollX: false,
             scrollY: true,
             preventDefault: false
@@ -71,7 +71,7 @@ class GoodsClassify extends Component {
     }
 
     handleScroll(pIndex) {
-        let oScrollClassify = document.getElementById("scroll-classify");
+        let oScrollClassify = this.refs["scroll-classify"];
         let iTopHeight = Math.round(parseInt(this.refs['item-' + pIndex].offsetHeight) * pIndex);
         let iHalfHeight = Math.round(oScrollClassify.offsetHeight / 3);
         let iBottomHeight = oScrollClassify.scrollHeight - iTopHeight;
@@ -95,7 +95,7 @@ class GoodsClassify extends Component {
     }
 
     componentWillUnmount() {
-        let oScrollClassify = document.getElementById("scroll-classify");
+        let oScrollClassify = this.refs["scroll-classify"];
         oScrollClassify.removeEventListener('touchmove', function (e) { e.preventDefault(); });
     }
 
@@ -115,7 +115,7 @@ class GoodsClassify extends Component {
                     <div className={Css['search']} onClick={this.changeSearch.bind(this)}>请输入宝贝名称</div>
                 </div>
                 <div className={Css['goods-main']}>
-                    <div id="scroll-classify" className={Css['classify-wrap']}>
+                    <div ref="scroll-classify" className={Css['classify-wrap']}>
                         <div>
                             {
                                 this.state.aClassify != null ?

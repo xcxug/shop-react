@@ -62,7 +62,7 @@ class GoodsSearch extends Component {
     }
 
     componentDidMount() {
-        this.myScroll = new IScroll('#screen', {
+        this.myScroll = new IScroll(this.refs['screen'], {
             scrollX: false,
             scrollY: true,
             preventDefault: false
@@ -438,7 +438,7 @@ class GoodsSearch extends Component {
                     }
                 </div>
                 <div ref="mask" className={this.state.bMask ? Css['mask'] : Css['mask'] + " hide"} onClick={this.hideScreen.bind(this)}></div>
-                <div ref="screen" id="screen" className={Css['screen'] + " " + this.state.screenMove}>
+                <div ref="screen" className={Css['screen'] + " " + this.state.screenMove}>
                     <div>
                         <div className={Css['attr-wrap']}>
                             <div className={Css['attr-title-wrap']} onClick={this.handleClassify.bind(this)}>
