@@ -26,7 +26,7 @@ class GoodsDetails extends Component {
         this.setTabStyle(this.props);
     }
 
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         this.setTabStyle(newProps);
     }
 

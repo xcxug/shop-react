@@ -295,7 +295,7 @@ class DetailsItem extends Component {
                         <div className={Css['amount-name']}>购买数量</div>
                         <div className={Css["amount-input-wrap"]}>
                             <div className={this.state.iAmount <= 1 ? Css['btn'] + " " + Css['dec'] + " " + Css["active"] : Css['btn'] + " " + Css['dec']} onClick={this.decAmount.bind(this)}>-</div>
-                            <div className={Css['amount-input']}><input type="tel" value={this.state.iAmount} onChange={(e) => { this.setState({ iAmount: e.target.value.replace(/[a-zA-Z]|[\u4e00-\u9fa5]|[#|*|,|+|;|\.]/g, '') }) }} /></div>
+                            <div className={Css['amount-input']}><input type="tel" value={this.state.iAmount} onChange={(e) => { this.setState({ iAmount: e.target.value.replace(/[a-zA-Z]|[\u4e00-\u9fa5]|[#|*|,|+|;|.]/g, '') }) }} /></div>
                             <div className={Css['btn'] + " " + Css['inc']} onClick={this.incAmount.bind(this)}>+</div>
                         </div>
                     </div>
