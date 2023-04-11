@@ -58,6 +58,12 @@ class HomeComponent extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState = (_state, _callback) => {
+            return;
+        }
+    }
+
     render() {
         return (
             <div>

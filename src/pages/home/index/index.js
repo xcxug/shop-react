@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Swiper from '../../../assets/js/libs/swiper.min.js';
 import config from '../../../assets/js/conf/config.js';
 import { request } from '../../../assets/js/libs/request.js';
-import { lazyImg } from '../../../assets/js/utils/util.js';
+import { lazyImg, setScrollTop } from '../../../assets/js/utils/util.js';
 import "../../../assets/css/common/swiper.min.css";
 import Css from '../../../assets/css/home/index/index.module.css';
 import SearchComponent from '../../../components/search/search';
@@ -23,6 +23,7 @@ class IndexComponent extends Component {
     }
 
     componentDidMount() {
+        setScrollTop(global.scrollTop.index);
         this.getSwiper();
         this.getNav();
         this.getGoodsLevel();
@@ -34,11 +35,16 @@ class IndexComponent extends Component {
     componentWillUnmount() {
         this.bScroll = false;
         window.removeEventListener("scroll", this.eventScroll.bind(this));
+
+        this.setState = (state, callback) => {
+            return;
+        }
     }
 
     eventScroll() {
         if (this.bScroll) {
             let iScrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            global.scrollTop.index = iScrollTop;
             if (iScrollTop >= 80) {
                 this.setState({ bScroll: true })
             } else {

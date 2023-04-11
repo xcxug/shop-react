@@ -7,6 +7,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 // import './assets/js/libs/zepto.js';
 import './assets/css/common/public.css';
+import './assets/js/conf/global.js';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './reducers';

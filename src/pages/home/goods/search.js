@@ -89,6 +89,10 @@ class GoodsSearch extends Component {
     componentWillUnmount() {
         this.refs['mask'].removeEventListener("touchmove", function (e) { e.preventDefault(); });
         this.refs['screen'].removeEventListener("touchmove", function (e) { e.preventDefault(); });
+
+        this.setState = (_state, _callback) => {
+            return;
+        }
     }
 
     goBack() {

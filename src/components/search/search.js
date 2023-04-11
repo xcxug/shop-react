@@ -84,6 +84,12 @@ class SearchComponent extends Component {
         }
     }
 
+    componentWillUnmount() {
+        this.setState = (_state, _callback) => {
+            return;
+        }
+    }
+
     render() {
         return (
             <div style={this.props.pageStyle} className={Css['page']}>

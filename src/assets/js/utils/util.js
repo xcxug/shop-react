@@ -25,4 +25,11 @@ function localParam(search, hash) {
     };
 }
 
-export { lazyImg, localParam };
+function setScrollTop(val = 0) {
+    setTimeout(() => {
+        document.body.scrollTop = val;
+        document.documentElement.scrollTop = val;
+    }, 300);
+}
+
+export { lazyImg, localParam, setScrollTop };

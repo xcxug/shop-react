@@ -97,6 +97,10 @@ class GoodsClassify extends Component {
     componentWillUnmount() {
         let oScrollClassify = this.refs["scroll-classify"];
         oScrollClassify.removeEventListener('touchmove', function (e) { e.preventDefault(); });
+
+        this.setState = (_state, _callback) => {
+            return;
+        }
     }
 
     changeSearch() {
