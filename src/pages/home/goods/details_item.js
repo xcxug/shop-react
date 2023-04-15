@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import config from '../../../assets/js/conf/config.js';
-import { localParam, setScrollTop } from '../../../assets/js/utils/util.js';
+import { request } from "../../../assets/js/libs/request";
+import { lazyImg, localParam, setScrollTop } from '../../../assets/js/utils/util.js';
 import Swiper from '../../../assets/js/libs/swiper.min.js';
 import TweenMax from '../../../assets/js/libs/TweenMax.js';
 import { Toast } from 'antd-mobile';
@@ -16,64 +17,64 @@ class DetailsItem extends Component {
             bMask: false,
             sCartPanel: Css['down'],
             gid: props.location.search !== '' ? localParam(props.location.search).search.gid : '',
-            aAttr: [
-                {
-                    "attrid": "1006",
-                    "title": "颜色",
-                    "values": [
-                        {
-                            "vid": "854",
-                            "value": "红色",
-                            "checked": false
-                        }, {
-                            "vid": "855",
-                            "value": "白色",
-                            "checked": false
-                        },
-                        {
-                            "vid": "856",
-                            "value": "黑色",
-                            "checked": false
-                        }
-                    ]
-                },
-                {
-                    "attrid": "1007",
-                    "title": "尺寸",
-                    "values": [
-                        {
-                            "vid": "857",
-                            "value": "36",
-                            "checked": false
-                        }, {
-                            "vid": "858",
-                            "value": "72",
-                            "checked": false
-                        },
-                        {
-                            "vid": "859",
-                            "value": "82",
-                            "checked": false
-                        }
-                    ]
-                }
-            ],
-            iAmount: 1
+            aAttr: [],
+            iAmount: 1,
+            aSlide: [],
+            sGoodsTitle: '',
+            fPrice: 0,
+            fFreight: 0,
+            iSales: 0,
+            aReviews: [],
+            iReviewTotal: 0
         }
         this.bMove = false;
     }
 
     componentDidMount() {
         setScrollTop()
-        this.getSwpier();
+        this.getGoodsInfo();
+        this.getGoodsAttr();
+        this.getReviews();
     }
 
-    getSwpier() {
-        new Swiper(this.refs['swpier-wrap'], {
-            autoplay: 3000,
-            pagination: '.swiper-pagination',
-            autoplayDisableOnInteraction: false
-        })
+    // 获取商品轮番图和获取商品信息
+    getGoodsInfo() {
+        let sUrl = config.baseUrl + "/api/home/goods/info?gid=" + this.state.gid + "&type=details&token=" + config.token;
+        request(sUrl).then((res) => {
+            if (res.code === 200) {
+                this.setState({ aSlide: res.data.images, sGoodsTitle: res.data.title, fPrice: res.data.price, fFreight: res.data.freight, iSales: res.data.sales }, () => {
+                    new Swiper(this.refs['swpier-wrap'], {
+                        autoplay: 3000,
+                        pagination: '.swiper-pagination',
+                        autoplayDisableOnInteraction: false
+                    })
+                })
+            }
+        });
+    }
+
+    // 获取商品规格属性
+    getGoodsAttr() {
+        let sUrl = config.baseUrl + "/api/home/goods/info?gid=" + this.state.gid + "&type=spec&token=" + config.token;
+        request(sUrl).then(res => {
+            if (res.code === 200) {
+                this.setState({ aAttr: res.data });
+            }
+        });
+    }
+
+    // 获取商品评价
+    getReviews() {
+        let sUrl = config.baseUrl + "/api/home/reviews/index?gid=" + this.state.gid + "&token=" + config.token + "&page=1";
+        request(sUrl).then((res) => {
+            if (res.code === 200) {
+                this.setState({ aReviews: res.data, iReviewTotal: res.pageinfo.total }, () => {
+                    lazyImg();
+                });
+            } else {
+                this.setState({ aReviews: [] })
+            }
+        });
     }
 
     // 显示购物控制面板
@@ -194,57 +195,47 @@ class DetailsItem extends Component {
             <div>
                 <div ref="swpier-wrap" className={Css['swpier-wrap']}>
                     <div className="swiper-wrapper">
-                        <div className="swiper-slide"><img src="//vueshop.glbuys.com/uploadfiles/1524556409.jpg" alt="" /></div>
-                        <div className="swiper-slide"><img src="//vueshop.glbuys.com/uploadfiles/1524556419.jpg" alt="" /></div>
-                        <div className="swiper-slide"><img src="//vueshop.glbuys.com/uploadfiles/1524556315.jpg" alt="" /></div>
+                        {
+                            this.state.aSlide.length > 0 ?
+                                this.state.aSlide.map((item, index) => {
+                                    return (
+                                        <div className="swiper-slide" key={index}><img src={item} alt="" /></div>
+                                    )
+                                })
+                                : ''
+                        }
                     </div>
                     <div className="swiper-pagination"></div>
                 </div>
                 <div className={Css['goods-ele-main']}>
-                    <div className={Css['goods-title']}>高跟鞋女2018新款春季单鞋仙女甜美链子尖头防水台细跟女鞋一字带</div>
-                    <div className={Css['price']}>¥128</div>
+                    <div className={Css['goods-title']}>{this.state.sGoodsTitle}</div>
+                    <div className={Css['price']}>¥{this.state.fPrice}</div>
                     <ul className={Css['sales-wrap']}>
-                        <li>快递：20元</li>
-                        <li>月销量10件</li>
+                        <li>快递：{this.state.fFreight}元</li>
+                        <li>月销量{this.state.iSales}件</li>
                     </ul>
                 </div>
                 <div className={Css['reviews-main']}>
-                    <div className={Css["reviews-title"]}>商品评价（22）</div>
+                    <div className={Css["reviews-title"]}>商品评价（{this.state.iReviewTotal}）</div>
                     <div className={Css['reviews-wrap']}>
-                        <div className={Css['reviews-list']}>
-                            <div className={Css['uinfo']}>
-                                <div className={Css['head']}><img src="//vueshop.glbuys.com/userfiles/head/492811357.jpg" alt="" /></div>
-                                <div className={Css['nickname']}>神秘人</div>
-                            </div>
-                            <div className={Css['reviews-content']}>评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
-                            <div className={Css['reviews-date']}>2018-10-15 14:29:29</div>
-                        </div>
-                        <div className={Css['reviews-list']}>
-                            <div className={Css['uinfo']}>
-                                <div className={Css['head']}><img src="//vueshop.glbuys.com/userfiles/head/492811357.jpg" alt="" /></div>
-                                <div className={Css['nickname']}>神秘人</div>
-                            </div>
-                            <div className={Css['reviews-content']}>评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
-                            <div className={Css['reviews-date']}>2018-10-15 14:29:29</div>
-                        </div>
-                        <div className={Css['reviews-list']}>
-                            <div className={Css['uinfo']}>
-                                <div className={Css['head']}><img src="//vueshop.glbuys.com/userfiles/head/492811357.jpg" alt="" /></div>
-                                <div className={Css['nickname']}>神秘人</div>
-                            </div>
-                            <div className={Css['reviews-content']}>评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
-                            <div className={Css['reviews-date']}>2018-10-15 14:29:29</div>
-                        </div>
-                        <div className={Css['reviews-list']}>
-                            <div className={Css['uinfo']}>
-                                <div className={Css['head']}><img src="//vueshop.glbuys.com/userfiles/head/492811357.jpg" alt="" /></div>
-                                <div className={Css['nickname']}>神秘人</div>
-                            </div>
-                            <div className={Css['reviews-content']}>评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容评价内容</div>
-                            <div className={Css['reviews-date']}>2018-10-15 14:29:29</div>
-                        </div>
+                        {
+                            this.state.aReviews.length > 0 ?
+                                this.state.aReviews.map((item, index) => {
+                                    return (
+                                        <div className={Css['reviews-list']} key={index}>
+                                            <div className={Css['uinfo']}>
+                                                <div className={Css['head']}><img alt={item.nickname} data-echo={item.head} src={require("../../../assets/images/common/lazyImg.jpg")} /></div>
+                                                <div className={Css['nickname']}>{item.nickname}</div>
+                                            </div>
+                                            <div className={Css['reviews-content']}>{item.content}</div>
+                                            <div className={Css['reviews-date']}>{item.times}</div>
+                                        </div>
+                                    )
+                                })
+                                : <div className="null-item">没有任何评价！</div>
+                        }
                     </div>
-                    <div className={Css['reviews-more']} onClick={this.replacePage.bind(this, 'goods/details/reviews?gid=' + this.state.gid)}>查看更多评价</div>
+                    <div className={this.state.iReviewTotal > 0 ? Css['reviews-more'] : Css['reviews-more'] + " hide"} onClick={this.replacePage.bind(this, 'goods/details/reviews?gid=' + this.state.gid)}>查看更多评价</div>
                 </div>
                 <div className={Css['bottom-btn-wrap']}>
                     <div className={Css['btn'] + " " + Css['fav']} onClick={this.addFav.bind(this)}>收藏</div>
@@ -259,12 +250,12 @@ class DetailsItem extends Component {
                             <div className={Css['close']} onClick={this.hideCartPanel.bind(this)}></div>
                         </div>
                         <div ref="goods-img" className={Css['goods-img']}>
-                            <img src="//vueshop.glbuys.com/uploadfiles/1524556409.jpg" alt="" />
+                            <img src={this.state.aSlide.length !== 0 ? this.state.aSlide[0] : ''} alt="" />
                         </div>
                         <div className={Css['goods-wrap']}>
-                            <div className={Css['goods-title']}>高跟鞋女2018新款春季单鞋仙女甜美链子尖头防水台细跟女鞋一字带高跟鞋女2018新款春季单鞋仙女甜美链子尖头防水台细跟女鞋一字带高跟鞋女2018新款春季单鞋仙女甜美链子尖头防水台细跟女鞋一字带</div>
-                            <div className={Css['price']}>¥128</div>
-                            <div className={Css['goods-code']}>商品编码:143208071</div>
+                            <div className={Css['goods-title']}>{this.state.sGoodsTitle}</div>
+                            <div className={Css['price']}>¥{this.state.fPrice}</div>
+                            <div className={Css['goods-code']}>商品编码:{this.state.gid}</div>
                         </div>
                     </div>
                     <div className={Css['attr-wrap']}>

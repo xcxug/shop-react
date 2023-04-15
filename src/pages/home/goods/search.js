@@ -392,6 +392,10 @@ class GoodsSearch extends Component {
         this.setState({ fPrice1: 0, fPrice2: 0, aClassify: aClassify, aPrice: aPrice, aAttr: aAttr })
     }
 
+    pushPage(url) {
+        this.props.history.push(config.path + url);
+    }
+
     render() {
         return (
             <div className={Css['page']}>
@@ -428,7 +432,7 @@ class GoodsSearch extends Component {
                         this.state.aGoods.length > 0 ?
                             this.state.aGoods.map((item, index) => {
                                 return (
-                                    <div key={index} className={Css['goods-list']}>
+                                    <div key={index} className={Css['goods-list']} onClick={this.pushPage.bind(this, 'goods/details/item?gid=' + item.gid)}>
                                         <div className={Css['image']}><img data-echo={item.image} src={require("../../../assets/images/common/lazyImg.jpg")} alt={item.title} /></div>
                                         <div className={Css['goods-content']}>
                                             <div className={Css['goods-title']}>{item.title}</div>
