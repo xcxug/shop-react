@@ -62,6 +62,10 @@ class GoodsDetails extends Component {
         this.props.history.replace(config.path + url);
     }
 
+    pushPage(url) {
+        this.props.history.push(config.path + url);
+    }
+
     render() {
         return (
             <div>
@@ -72,7 +76,7 @@ class GoodsDetails extends Component {
                         <div className={this.state.tabStyle.bContent ? Css['tab-name'] + " " + Css['active'] : Css['tab-name']} onClick={this.replacePage.bind(this, 'goods/details/content?gid=' + this.state.gid + '')}>详情</div>
                         <div className={this.state.tabStyle.bReviews ? Css['tab-name'] + " " + Css['active'] : Css['tab-name']} onClick={this.replacePage.bind(this, 'goods/details/reviews?gid=' + this.state.gid + '')}>评价</div>
                     </div>
-                    <div id="cart-icon" className={Css['cart-icon']}>
+                    <div id="cart-icon" className={Css['cart-icon']} onClick={this.pushPage.bind(this, 'home/cart')}>
                         <div className={Css['spot']}></div>
                     </div>
                 </div>
