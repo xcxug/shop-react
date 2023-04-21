@@ -19,6 +19,8 @@
 .bottom-nav ul {
   width: 0.8rem;
   height: 0.9rem;
+  position: relative;
+  z-index: 1;
 }
 
 .bottom-nav ul:nth-child(1) {
@@ -85,4 +87,15 @@
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.bottom-nav ul .spot {
+  width: 0.2rem;
+  height: 0.2rem;
+  background-color: #CC0004;
+  border-radius: 100%;
+  position: absolute;
+  z-index: 1;
+  right: 0px;
+  top: 0px;
 }

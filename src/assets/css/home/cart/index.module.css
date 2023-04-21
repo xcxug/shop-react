@@ -200,6 +200,10 @@
   line-height: 1rem;
 }
 
+.orderend-wrap .orderend-btn.disable {
+  background: #BFBFBF;
+}
+
 .orderend-wrap .total {
   font-size: 0.24rem;
   margin-right: 0.2rem;

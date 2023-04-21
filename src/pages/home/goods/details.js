@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
 import { Route, Switch, Redirect } from 'react-router-dom';
 import asyncComponents from '../../../components/async/AsyncComponent';
 import config from '../../../assets/js/conf/config.js';
@@ -77,7 +78,7 @@ class GoodsDetails extends Component {
                         <div className={this.state.tabStyle.bReviews ? Css['tab-name'] + " " + Css['active'] : Css['tab-name']} onClick={this.replacePage.bind(this, 'goods/details/reviews?gid=' + this.state.gid + '')}>评价</div>
                     </div>
                     <div id="cart-icon" className={Css['cart-icon']} onClick={this.pushPage.bind(this, 'home/cart')}>
-                        <div className={Css['spot']}></div>
+                        <div className={this.props.state.cart.aCartData.length > 0 ? Css['spot'] : Css['spot'] + " hide"}></div>
                     </div>
                 </div>
                 <div className={Css['sub-page']}>
@@ -93,4 +94,8 @@ class GoodsDetails extends Component {
     }
 }
 
-export default GoodsDetails;
+export default connect((state) => {
+    return {
+        state: state
+    }
+})(GoodsDetails);

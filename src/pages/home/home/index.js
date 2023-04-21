@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from 'react';
+import { connect } from "react-redux";
 import { Route, Switch } from 'react-router-dom';
 import asyncComponents from '../../../components/async/AsyncComponent';
 import config from '../../../assets/js/conf/config.js';
@@ -82,6 +83,7 @@ class HomeComponent extends Component {
                     <ul onClick={this.goPage.bind(this, 'home/cart')}>
                         <li className={this.state.bCartStyle ? Css['cart'] + " " + Css['active'] : Css['cart']}></li>
                         <li className={this.state.bCartStyle ? Css['text'] + " " + Css['active'] : Css['text']}>购物车</li>
+                        <li className={this.props.state.cart.aCartData.length > 0 ? Css['spot'] : Css['spot'] + " hide"}></li>
                     </ul>
                     <ul onClick={this.goPage.bind(this, 'home/my')}>
                         <li className={this.state.bMyStyle ? Css['my'] + " " + Css['active'] : Css['my']}></li>
@@ -93,4 +95,8 @@ class HomeComponent extends Component {
     }
 }
 
-export default HomeComponent;
+export default connect((state) => {
+    return {
+        state: state
+    }
+})(HomeComponent);
