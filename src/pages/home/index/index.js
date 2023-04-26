@@ -117,7 +117,7 @@ class IndexComponent extends Component {
                         <div className={Css['search-text']}>请输入宝贝名称</div>
                     </div>
                     <div className={Css['login-wrap']}>
-                        <div className={Css['login-text']}>登录</div>
+                        <div className={Css['login-text']} onClick={this.pushPage.bind(this, "login/index")}>登录</div>
                     </div>
                 </div>
                 <div ref="swiper-wrap" className={Css['swiper-wrap']}>
