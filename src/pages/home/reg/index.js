@@ -11,11 +11,11 @@ class RegIndex extends Component {
 
         this.state = {
             checked: false,
-            sCellphone: '',
+            sCellphone: '', // 13717628485
             bCodeSuccess: false,
             sCodeText: '获取短信验证码',
             sCode: '',
-            sPassword: '',
+            sPassword: '', // 123456
             sType: "password"
         };
         this.timer = null;
@@ -45,7 +45,12 @@ class RegIndex extends Component {
             let resData = await this.isSameCellphone();
             if (resData.code === 200) {
                 if (resData.data.isreg === '1') {
-                    Toast.info("您输入的手机号已存在", 2);
+                    Toast.show({
+                        content: '您输入的手机号已存在',
+                        afterClose: () => {
+                            console.log('after');
+                        },
+                    })
                     return false;
                 }
             }
@@ -69,26 +74,51 @@ class RegIndex extends Component {
     // 点击注册按钮提交数据
     async submitData() {
         if (this.state.sCellphone.match(/^\s*$/)) {
-            Toast.info("请输入您的手机号", 2);
+            Toast.show({
+                content: '请输入您的手机号',
+                afterClose: () => {
+                    console.log('after');
+                },
+            })
             return false;
         }
         if (!this.state.sCellphone.match(/^1[0-9][0-9]{9}/)) {
-            Toast.info("您输入的手机号格式不正确", 2);
+            Toast.show({
+                content: '您输入的手机号格式不正确',
+                afterClose: () => {
+                    console.log('after');
+                },
+            })
             return false;
         }
         let resData = await this.isSameCellphone();
         if (resData.code === 200) {
             if (resData.data.isreg === '1') {
-                Toast.info("您输入的手机号已存在", 2);
+                Toast.show({
+                    content: '您输入的手机号已存在',
+                    afterClose: () => {
+                        console.log('after');
+                    },
+                })
                 return false;
             }
         }
         if (this.state.sCode.match(/^\s*$/)) {
-            Toast.info("请输入短信验证码", 2);
+            Toast.show({
+                content: '请输入短信验证码',
+                afterClose: () => {
+                    console.log('after');
+                },
+            })
             return false;
         }
         if (this.state.sPassword.match(/^\s*$/)) {
-            Toast.info("请输入密码", 2);
+            Toast.show({
+                content: '请输入密码',
+                afterClose: () => {
+                    console.log('after');
+                },
+            })
             return false;
         }
         let sUrl = config.baseUrl + "/api/home/user/reg?token=" + config.token;
