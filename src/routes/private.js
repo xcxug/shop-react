@@ -1,7 +1,8 @@
 import React from 'react';
 import { Redirect, Route } from 'react-router-dom';
+import config from '../assets/js/conf/config.js';
 
-function PrivateRoute({ component: Component, ...rest }) {
+function AuthRoute({ component: Component, ...rest }) {
     return <Route
         {...rest}
         render={props =>
@@ -10,7 +11,7 @@ function PrivateRoute({ component: Component, ...rest }) {
             ) : (
                 <Redirect
                     to={{
-                        pathname: "/login",
+                        pathname: config.path + "login/index",
                         state: { from: props.location }
                     }}
                 />
@@ -19,4 +20,4 @@ function PrivateRoute({ component: Component, ...rest }) {
     />
 }
 
-export { PrivateRoute };
+export { AuthRoute };

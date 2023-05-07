@@ -22,6 +22,10 @@ class RegIndex extends Component {
         this.bSendCode = true;
     }
 
+    componentDidMount() {
+        document.getElementById("title").innerHTML = "会员注册";
+    }
+
     // 验证手机号
     checkCellphone(e) {
         this.setState({ sCellphone: e.target.value }, () => {
@@ -133,7 +137,7 @@ class RegIndex extends Component {
                     <div className={Css['password-wrap']}>
                         <div className={Css['password']}><input type={this.state.sType} placeholder="请输入密码" onChange={(e) => { this.setState({ sPassword: e.target.value }) }} /></div>
                         <div className={Css['switch-wrap']}>
-                            <Switch checked={this.state.checked} onClick={this.changePwd.bind(this, !this.state.checked)}></Switch>
+                            <Switch style={{ '--checked-color': '#EB1625' }} checked={this.state.checked} onChange={this.changePwd.bind(this, !this.state.checked)}></Switch>
                         </div>
                     </div>
                     <div className={Css['sure-btn']} onClick={this.submitData.bind(this)}>注册</div>

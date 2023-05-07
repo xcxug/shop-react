@@ -71,6 +71,15 @@
   color: #FFFFFF;
 }
 
+.search-header .login-wrap .my {
+  width: 0.6rem;
+  height: 0.6rem;
+  background-image: url("../../../../assets/images/home/index/my.png");
+  background-size: 100%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
 .swiper-wrap {
   width: 100%;
   height: 3.65rem;

@@ -1,4 +1,5 @@
 import ReactDOM from 'react-dom';
+import { fetch } from 'whatwg-fetch'; // 让ie支持fetch()请求接口
 let oLoad = ReactDOM.findDOMNode(document.getElementById("page-load"));
 
 function request(pUrl, pType = 'get'.toLocaleLowerCase(), data = {}) {

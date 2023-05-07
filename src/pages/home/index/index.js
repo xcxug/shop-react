@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Swiper from '../../../assets/js/libs/swiper.min.js';
 import config from '../../../assets/js/conf/config.js';
 import { request } from '../../../assets/js/libs/request.js';
+import { connect } from "react-redux";
 import { lazyImg, setScrollTop } from '../../../assets/js/utils/util.js';
 import "../../../assets/css/common/swiper.min.css";
 import Css from '../../../assets/css/home/index/index.module.css';
@@ -36,7 +37,7 @@ class IndexComponent extends Component {
         this.bScroll = false;
         window.removeEventListener("scroll", this.eventScroll.bind(this));
 
-        this.setState = (state, callback) => {
+        this.setState = (_state, _callback) => {
             return;
         }
     }
@@ -117,7 +118,9 @@ class IndexComponent extends Component {
                         <div className={Css['search-text']}>请输入宝贝名称</div>
                     </div>
                     <div className={Css['login-wrap']}>
-                        <div className={Css['login-text']} onClick={this.pushPage.bind(this, "login/index")}>登录</div>
+                        {
+                            this.props.state.user.isLogin ? <div className={Css['my']} onClick={this.pushPage.bind(this, "home/my")}></div> : <div className={Css['login-text']} onClick={this.pushPage.bind(this, "login/index")}>登录</div>
+                        }
                     </div>
                 </div>
                 <div ref="swiper-wrap" className={Css['swiper-wrap']}>
@@ -240,4 +243,8 @@ class IndexComponent extends Component {
     }
 }
 
-export default IndexComponent;
+export default connect((state) => {
+    return {
+        state: state
+    }
+})(IndexComponent);
