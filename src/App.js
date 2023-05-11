@@ -16,6 +16,7 @@ const GoodsSearch = asyncComponents(() => import('./pages/home/goods/search'));
 const GoodsDetails = asyncComponents(() => import('./pages/home/goods/details'));
 const LoginIndex = asyncComponents(() => import('./pages/home/login/index'));
 const RegIndex = asyncComponents(() => import('./pages/home/reg/index'));
+const BalanceIndex = asyncComponents(() => import('./pages/home/balance/index'));
 
 class App extends Component {
   render() {
@@ -30,6 +31,7 @@ class App extends Component {
               <Route path={config.path + "goods/details"} component={GoodsDetails} ></Route>
               <Route path={config.path + "login/index"} component={LoginIndex} ></Route>
               <Route path={config.path + "reg/index"} component={RegIndex} ></Route>
+              <Route path={config.path + "balance/index"} component={BalanceIndex} ></Route>
               <Redirect to={config.path + "home/index"}></Redirect>
             </Switch>
           </Fragment>

@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
+import config from '../../../assets/js/conf/config.js';
 import action from '../../../actions';
 import SubHeaderComponent from '../../../components/header/subheader';
 import Css from '../../../assets/css/home/cart/index.module.css';
@@ -94,6 +95,13 @@ class CartIndex extends Component {
         }
     }
 
+    // 去结算
+    goBalance() {
+        if (this.props.state.cart.total > 0) {
+            this.props.history.push(config.path + "balance/index")
+        }
+    }
+
     componentWillUnmount() {
         this.setState = (_state, _callback) => {
             return;
@@ -159,7 +167,7 @@ class CartIndex extends Component {
                         </div>
                         <div className={Css['total']}>合计：<span>{this.props.state.cart.total}</span></div>
                     </div>
-                    <div className={this.props.state.cart.total > 0 ? Css['orderend-btn'] : Css['orderend-btn'] + " " + Css['disable']}>去结算</div>
+                    <div className={this.props.state.cart.total > 0 ? Css['orderend-btn'] : Css['orderend-btn'] + " " + Css['disable']} onClick={this.goBalance.bind(this)}>去结算</div>
                 </div>
             </div>
         );
