@@ -7,7 +7,7 @@
 */
 import React, { Component, Fragment } from 'react';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-// import {PrivateRoute} from './routes/private';
+import { AuthRoute } from './routes/private';
 import asyncComponents from './components/async/AsyncComponent';
 import config from './assets/js/conf/config.js';
 const HomeComponent = asyncComponents(() => import('./pages/home/home/index'));
@@ -31,7 +31,7 @@ class App extends Component {
               <Route path={config.path + "goods/details"} component={GoodsDetails} ></Route>
               <Route path={config.path + "login/index"} component={LoginIndex} ></Route>
               <Route path={config.path + "reg/index"} component={RegIndex} ></Route>
-              <Route path={config.path + "balance/index"} component={BalanceIndex} ></Route>
+              <AuthRoute path={config.path + "balance/index"} component={BalanceIndex} ></AuthRoute>
               <Redirect to={config.path + "home/index"}></Redirect>
             </Switch>
           </Fragment>

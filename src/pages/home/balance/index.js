@@ -1,9 +1,16 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import Css from '../../../assets/css/home/balance/index.module.css';
 import SubHeaderComponent from '../../../components/header/subheader';
+import { safeAuth } from '../../../assets/js/utils/util.js';
 
 class BalanceIndex extends Component {
+    constructor(props) {
+        super(props);
+
+        safeAuth(props);
+    }
+
     render() {
         return (
             <div className={Css['page']}>
@@ -31,73 +38,58 @@ class BalanceIndex extends Component {
                         </div>
                     </div>
                     <div className={Css['goods-wrap']}>
-                        <div className={Css['goods-list']}>
-                            <div className={Css['image']}><img src="//vueshop.glbuys.com/uploadfiles/1524556213.jpg" alt="" /></div>
-                            <div className={Css['goods-param']}>
-                                <div className={Css['title']}>老爹鞋女韩版ulzzang原宿百搭网鞋透气网面内增高运动鞋网鞋夏季</div>
-                                <div className={Css['attr']}><span>颜色：蓝色</span><span>尺码：36</span></div>
-                                <div className={Css['amount']}>x 1</div>
-                                <div className={Css['price']}>￥255</div>
-                            </div>
-                        </div>
-                        <div className={Css['goods-list']}>
-                            <div className={Css['image']}><img src="//vueshop.glbuys.com/uploadfiles/1524556213.jpg" alt="" /></div>
-                            <div className={Css['goods-param']}>
-                                <div className={Css['title']}>老爹鞋女韩版ulzzang原宿百搭网鞋透气网面内增高运动鞋网鞋夏季</div>
-                                <div className={Css['attr']}><span>颜色：蓝色</span><span>尺码：36</span></div>
-                                <div className={Css['amount']}>x 1</div>
-                                <div className={Css['price']}>￥255</div>
-                            </div>
-                        </div>
-                        <div className={Css['goods-list']}>
-                            <div className={Css['image']}><img src="//vueshop.glbuys.com/uploadfiles/1524556213.jpg" alt="" /></div>
-                            <div className={Css['goods-param']}>
-                                <div className={Css['title']}>老爹鞋女韩版ulzzang原宿百搭网鞋透气网面内增高运动鞋网鞋夏季</div>
-                                <div className={Css['attr']}><span>颜色：蓝色</span><span>尺码：36</span></div>
-                                <div className={Css['amount']}>x 1</div>
-                                <div className={Css['price']}>￥255</div>
-                            </div>
-                        </div>
-                        <div className={Css['goods-list']}>
-                            <div className={Css['image']}><img src="//vueshop.glbuys.com/uploadfiles/1524556213.jpg" alt="" /></div>
-                            <div className={Css['goods-param']}>
-                                <div className={Css['title']}>老爹鞋女韩版ulzzang原宿百搭网鞋透气网面内增高运动鞋网鞋夏季</div>
-                                <div className={Css['attr']}><span>颜色：蓝色</span><span>尺码：36</span></div>
-                                <div className={Css['amount']}>x 1</div>
-                                <div className={Css['price']}>￥255</div>
-                            </div>
-                        </div>
-                        <div className={Css['goods-list']}>
-                            <div className={Css['image']}><img src="//vueshop.glbuys.com/uploadfiles/1524556213.jpg" alt="" /></div>
-                            <div className={Css['goods-param']}>
-                                <div className={Css['title']}>老爹鞋女韩版ulzzang原宿百搭网鞋透气网面内增高运动鞋网鞋夏季</div>
-                                <div className={Css['attr']}><span>颜色：蓝色</span><span>尺码：36</span></div>
-                                <div className={Css['amount']}>x 1</div>
-                                <div className={Css['price']}>￥255</div>
-                            </div>
-                        </div>
-                        <div className={Css['goods-list']}>
-                            <div className={Css['image']}><img src="//vueshop.glbuys.com/uploadfiles/1484288656.jpg" alt="" /></div>
-                            <div className={Css['goods-param']}>
-                                <div className={Css['title']}>老爹鞋女韩版ulzzang原宿百搭网鞋透气网面内增高运动鞋网鞋夏季</div>
-                                <div className={Css['attr']}><span>颜色：蓝色</span><span>尺码：36</span></div>
-                                <div className={Css['amount']}>x 1</div>
-                                <div className={Css['price']}>￥255</div>
-                            </div>
-                        </div>
+                        {
+                            this.props.state.cart.aCartData.length > 0 ?
+                                this.props.state.cart.aCartData.map((item, index) => {
+                                    return (
+                                        item.checked ?
+                                            <div className={Css['goods-list']} key={index}>
+                                                <div className={Css['image']}><img src={item.img} alt={item.title} /></div>
+                                                <div className={Css['goods-param']}>
+                                                    <div className={Css['title']}>{item.title}</div>
+                                                    <div className={Css['attr']}>
+                                                        {
+                                                            item.attrs.length > 0 ?
+                                                                item.attrs.map((item2, index2) => {
+                                                                    return (
+                                                                        <span key={index2}>{item2.title}：
+                                                                            {
+                                                                                item2.param.length > 0 ?
+                                                                                    item2.param.map((item3, index3) => {
+                                                                                        return (
+                                                                                            <Fragment key={index3}>{item3.title}</Fragment>
+                                                                                        )
+                                                                                    })
+                                                                                    : ''
+                                                                            }
+                                                                        </span>
+                                                                    )
+                                                                })
+                                                                : ''
+                                                        }
+                                                    </div>
+                                                    <div className={Css['amount']}>x {item.amount}</div>
+                                                    <div className={Css['price']}>￥{item.price}</div>
+                                                </div>
+                                            </div>
+                                            : ""
+                                    )
+                                })
+                                : ""
+                        }
                     </div>
                     <ul className={Css['total-wrap']}>
                         <li>商品总额</li>
-                        <li>￥2550</li>
+                        <li>￥{this.props.state.cart.total}</li>
                     </ul>
                     <ul className={Css['total-wrap']}>
                         <li>运费</li>
-                        <li>￥20</li>
+                        <li>￥{this.props.state.cart.freight}</li>
                     </ul>
                 </div>
                 <div className={Css['balance-wrap']}>
                     <div className={Css['price-wrap']}>
-                        <span>实际金额：</span><span>￥25555</span>
+                        <span>实际金额：</span><span>￥{parseFloat(Math.round(this.props.state.cart.total + this.props.state.cart.freight).toFixed(2))}</span>
                     </div>
                     <div className={Css['balance-btn']}>提交订单</div>
                 </div>

@@ -143,6 +143,10 @@
   color: #868686
 }
 
+.goods-wrap .goods-list .attr span {
+  padding-right: 0.3rem;
+}
+
 .goods-wrap .goods-list .amount {
   font-size: 0.24rem;
   color: #868686;
