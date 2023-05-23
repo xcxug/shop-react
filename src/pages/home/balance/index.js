@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import Css from '../../../assets/css/home/balance/index.module.css';
 import SubHeaderComponent from '../../../components/header/subheader';
 import { safeAuth } from '../../../assets/js/utils/util.js';
+import config from "../../../assets/js/conf/config";
 
 class BalanceIndex extends Component {
     constructor(props) {
@@ -11,12 +12,16 @@ class BalanceIndex extends Component {
         safeAuth(props);
     }
 
+    pushPage(url) {
+        this.props.history.push(config.path + url);
+    }
+
     render() {
         return (
             <div className={Css['page']}>
                 <SubHeaderComponent title="确认订单"></SubHeaderComponent>
                 <div className={Css['main']}>
-                    <div className={Css['address-wrap']}>
+                    <div className={Css['address-wrap']} onClick={this.pushPage.bind(this, 'address/index')}>
                         <div className={Css['persion-info']}>
                             <span>收货人：王五</span><span>13717628483</span>
                         </div>
