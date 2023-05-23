@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from "react-redux";
 import config from '../../../assets/js/conf/config.js';
 import { safeAuth } from '../../../assets/js/utils/util.js';
 import SubHeaderComponent from '../../../components/header/subheader';
 import Css from '../../../assets/css/home/address/add.module.css';
 
-class AddressAdd extends React.Component {
+class AddressAdd extends Component {
     constructor(props) {
         super(props);
 
