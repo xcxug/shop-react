@@ -66,6 +66,12 @@ class AddressIndex extends Component {
         this.props.history.replace(config.path + "balance/index");
     }
 
+    // 修改收货地址
+    modAddress(e, aid) {
+        e.stopPropagation();
+        this.pushPage('address/mod?aid=' + aid)
+    }
+
     componentWillUnmount() {
         this.setState = (_state, _callback) => {
             return;
@@ -97,7 +103,7 @@ class AddressIndex extends Component {
                                             </div>
                                         </div>
                                         <div className={Css['handle-wrap']}>
-                                            <div className={Css['edit']}></div>
+                                            <div className={Css['edit']} onClick={(e) => { this.modAddress(e, item.aid) }}></div>
                                             <div className={Css['del']} onClick={(e) => { this.delAddress(e, index, item.aid) }}></div>
                                         </div>
                                     </div>

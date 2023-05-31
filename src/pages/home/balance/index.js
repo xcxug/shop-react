@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
+import { Toast } from 'antd-mobile';
 import Css from '../../../assets/css/home/balance/index.module.css';
 import { request } from '../../../assets/js/libs/request.js';
 import SubHeaderComponent from '../../../components/header/subheader';
@@ -51,6 +52,30 @@ class BalanceIndex extends Component {
                 this.setState({ sName: res.data.name, sCellphone: res.data.cellphone, sProvince: res.data.province, sCity: res.data.city, sArea: res.data.area, sAddress: res.data.sAddress })
             }
         });
+    }
+
+    // 提交收货地址
+    submitOrder() {
+        let sAddressId = sessionStorage['addressId'] || localStorage['addressId'];
+        if (sAddressId !== undefined) {
+            if (this.props.state.cart.total > 0) {
+
+            } else {
+                Toast.show({
+                    content: '您的购物车里还没有商品！',
+                    afterClose: () => {
+                        console.log('after');
+                    },
+                })
+            }
+        } else {
+            Toast.show({
+                content: '请选择收货地址',
+                afterClose: () => {
+                    console.log('after');
+                },
+            })
+        }
     }
 
     replacePage(url) {
@@ -150,7 +175,7 @@ class BalanceIndex extends Component {
                     <div className={Css['price-wrap']}>
                         <span>实际金额：</span><span>￥{parseFloat(Math.round(this.props.state.cart.total + this.props.state.cart.freight).toFixed(2))}</span>
                     </div>
-                    <div className={Css['balance-btn']}>提交订单</div>
+                    <div className={Css['balance-btn']} onClick={this.submitOrder.bind(this)}>提交订单</div>
                 </div>
             </div>
         )
