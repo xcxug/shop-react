@@ -17,6 +17,7 @@ class IndexComponent extends Component {
         request(sUrl, "post", { uid: this.props.state.user.uid }).then(res => {
             if (res.code === 200) {
                 this.props.dispatch(action.user.outLogin());
+                this.props.dispatch(action.cart.clearCart());
                 this.props.history.replace(config.path + 'login/index');
             }
         });

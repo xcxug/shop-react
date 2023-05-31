@@ -27,6 +27,9 @@ function cartReducer(state = cartData, action) {
         case "changeAmount":
             changeAmount(state, action.data);
             return Object.assign({}, state);
+        case "clearCart":
+            clearCart(state);
+            return Object.assign({}, state);
         default:
             return state;
     }
@@ -136,6 +139,16 @@ function changeAmount(state, action) {
     state.aCartData[action.index].amount = action.amount;
     setTotal(state);
     localStorage['cartData'] = JSON.stringify(state.aCartData);
+}
+
+// 清空购物车
+function clearCart(state) {
+    localStorage.removeItem("cartData");
+    localStorage.removeItem("total");
+    localStorage.removeItem("freight");
+    state.aCartData = [];
+    state.total = 0;
+    state.freight = 0;
 }
 
 export default cartReducer;

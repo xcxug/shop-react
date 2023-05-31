@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import config from '../../assets/js/conf/config.js';
 import Css from './subheader.module.css';
 
 class SubHeader extends Component {
     goBack() {
-        this.props.history.goBack();
+        if (this.props.location.pathname === config.path + 'address/index') {
+            this.props.history.replace(config.path + 'balance/index');
+        } else {
+            this.props.history.goBack();
+        }
     }
 
     render() {

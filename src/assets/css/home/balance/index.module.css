@@ -94,6 +94,20 @@
   top: 0.6rem;
 }
 
+.address-wrap .address-null {
+  width: auto;
+  height: auto;
+  font-size: 0.28rem;
+  position: absolute;
+  z-index: 1;
+  left: 50%;
+  top: 0;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  display: table;
+  margin-top: 0.5rem;
+}
+
 .goods-wrap {
   width: 100%;
   margin-top: 0.4rem;

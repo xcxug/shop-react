@@ -91,11 +91,22 @@ class AddressAdd extends Component {
         };
         request(url, "post", data).then((res) => {
             if (res.code === 200) {
+                if (this.state.bChecked) {
+                    localStorage['addressId'] = res.data.aid;
+                    sessionStorage.removeItem("addressId");
+                }
                 Toast.show({
                     content: '添加成功',
                     afterClose: () => {
                         console.log('after');
-                        this.props.history.replace(config.path + "address/index");
+                        this.props.history.goBack();
+                    },
+                })
+            } else {
+                Toast.show({
+                    content: res.data,
+                    afterClose: () => {
+                        console.log('after');
                     },
                 })
             }
