@@ -21,6 +21,7 @@ class BalanceIndex extends Component {
             sArea: "",
             sAddress: ""
         }
+        this.bSubmit = true;
     }
 
     componentDidMount() {
@@ -59,7 +60,21 @@ class BalanceIndex extends Component {
         let sAddressId = sessionStorage['addressId'] || localStorage['addressId'];
         if (sAddressId !== undefined) {
             if (this.props.state.cart.total > 0) {
-
+                if (this.bSubmit) {
+                    this.bSubmit = false;
+                    let sUrl = config.baseUrl + "/api/order/add?token=" + config.token;
+                    let jData = {
+                        uid: this.props.state.user.uid,
+                        freight: this.props.state.cart.freight,
+                        addsid: sAddressId,
+                        goodsData: JSON.stringify(this.props.state.cart.aCartData)
+                    };
+                    request(sUrl, "post", jData).then(res => {
+                        if (res.code === 200) {
+                            this.props.history.push(config.path + "balance/end");
+                        }
+                    });
+                }
             } else {
                 Toast.show({
                     content: '您的购物车里还没有商品！',

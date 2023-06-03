@@ -108,7 +108,7 @@ class AddressMod extends Component {
         request(url, "post", data).then((res) => {
             if (res.code === 200) {
                 if (this.state.bChecked) {
-                    localStorage['addressId'] = res.data.aid;
+                    localStorage['addressId'] = this.aid;
                     sessionStorage.removeItem("addressId");
                 } else {
                     localStorage.removeItem("addressId");

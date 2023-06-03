@@ -17,6 +17,7 @@ const GoodsDetails = asyncComponents(() => import('./pages/home/goods/details'))
 const LoginIndex = asyncComponents(() => import('./pages/home/login/index'));
 const RegIndex = asyncComponents(() => import('./pages/home/reg/index'));
 const BalanceIndex = asyncComponents(() => import('./pages/home/balance/index'));
+const BalanceEnd = asyncComponents(() => import('./pages/home/balance/end'));
 const AddressIndex = asyncComponents(() => import('./pages/home/address/index'));
 const AddressAdd = asyncComponents(() => import('./pages/home/address/add'));
 const AddressMod = asyncComponents(() => import('./pages/home/address/mod'));
@@ -35,6 +36,7 @@ class App extends Component {
               <Route path={config.path + "login/index"} component={LoginIndex} ></Route>
               <Route path={config.path + "reg/index"} component={RegIndex} ></Route>
               <AuthRoute path={config.path + "balance/index"} component={BalanceIndex} ></AuthRoute>
+              <AuthRoute path={config.path + "balance/end"} component={BalanceEnd} ></AuthRoute>
               <AuthRoute path={config.path + "address/index"} component={AddressIndex} ></AuthRoute>
               <AuthRoute path={config.path + "address/add"} component={AddressAdd} ></AuthRoute>
               <AuthRoute path={config.path + "address/mod"} component={AddressMod} ></AuthRoute>

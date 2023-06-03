@@ -20,6 +20,7 @@ class RegIndex extends Component {
         };
         this.timer = null;
         this.bSendCode = true;
+        this.bSubmit = true;
     }
 
     componentDidMount() {
@@ -121,12 +122,15 @@ class RegIndex extends Component {
             })
             return false;
         }
-        let sUrl = config.baseUrl + "/api/home/user/reg?token=" + config.token;
-        request(sUrl, "post", { vcode: this.state.sCode, cellphone: this.state.sCellphone, password: this.state.sPassword }).then(res => {
-            if (res.code === 200) {
-                this.props.history.goBack();
-            }
-        });
+        if (this.bSubmit) {
+            this.bSubmit = false;
+            let sUrl = config.baseUrl + "/api/home/user/reg?token=" + config.token;
+            request(sUrl, "post", { vcode: this.state.sCode, cellphone: this.state.sCellphone, password: this.state.sPassword }).then(res => {
+                if (res.code === 200) {
+                    this.props.history.goBack();
+                }
+            });
+        }
     }
 
     // 显示密码是明码还是暗码

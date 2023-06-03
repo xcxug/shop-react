@@ -25,6 +25,7 @@ class AddressAdd extends Component {
             bChecked: false,
             visible: false
         }
+        this.bSubmit = true;
     }
 
     pushPage(url) {
@@ -89,28 +90,31 @@ class AddressAdd extends Component {
             address: this.state.sAddress,
             isdefault: this.state.bChecked ? "1" : "0"
         };
-        request(url, "post", data).then((res) => {
-            if (res.code === 200) {
-                if (this.state.bChecked) {
-                    localStorage['addressId'] = res.data.aid;
-                    sessionStorage.removeItem("addressId");
+        if (this.bSubmit) {
+            this.bSubmit = false;
+            request(url, "post", data).then((res) => {
+                if (res.code === 200) {
+                    if (this.state.bChecked) {
+                        localStorage['addressId'] = res.data.aid;
+                        sessionStorage.removeItem("addressId");
+                    }
+                    Toast.show({
+                        content: '添加成功',
+                        afterClose: () => {
+                            console.log('after');
+                            this.props.history.goBack();
+                        },
+                    })
+                } else {
+                    Toast.show({
+                        content: res.data,
+                        afterClose: () => {
+                            console.log('after');
+                        },
+                    })
                 }
-                Toast.show({
-                    content: '添加成功',
-                    afterClose: () => {
-                        console.log('after');
-                        this.props.history.goBack();
-                    },
-                })
-            } else {
-                Toast.show({
-                    content: res.data,
-                    afterClose: () => {
-                        console.log('after');
-                    },
-                })
-            }
-        });
+            });
+        }
     }
 
     componentWillUnmount() {

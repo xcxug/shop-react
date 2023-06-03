@@ -17,6 +17,7 @@ class LoginIndex extends Component {
             sPassword: '', // 123456
             sType: "password"
         };
+        this.bSubmit = true;
     }
 
     componentDidMount() {
@@ -52,24 +53,27 @@ class LoginIndex extends Component {
             })
             return false;
         }
-        let sUrl = config.baseUrl + "/api/home/user/pwdlogin?token=" + config.token;
-        request(sUrl, "post", { cellphone: this.state.sCellphone, password: this.state.sPassword }).then(res => {
-            if (res.code === 200) {
-                localStorage['uid'] = res.data.uid;
-                localStorage['nickname'] = res.data.nickname;
-                localStorage['authToken'] = res.data.auth_token;
-                localStorage['isLogin'] = true;
-                this.props.dispatch(action.user.login({ uid: res.data.uid, nickname: res.data.nickname, authToken: res.data.auth_token, isLogin: true }));
-                this.props.history.goBack();
-            } else {
-                Toast.show({
-                    content: res.data,
-                    afterClose: () => {
-                        console.log('after');
-                    },
-                })
-            }
-        });
+        if (this.bSubmit) {
+            this.bSubmit = false;
+            let sUrl = config.baseUrl + "/api/home/user/pwdlogin?token=" + config.token;
+            request(sUrl, "post", { cellphone: this.state.sCellphone, password: this.state.sPassword }).then(res => {
+                if (res.code === 200) {
+                    localStorage['uid'] = res.data.uid;
+                    localStorage['nickname'] = res.data.nickname;
+                    localStorage['authToken'] = res.data.auth_token;
+                    localStorage['isLogin'] = true;
+                    this.props.dispatch(action.user.login({ uid: res.data.uid, nickname: res.data.nickname, authToken: res.data.auth_token, isLogin: true }));
+                    this.props.history.goBack();
+                } else {
+                    Toast.show({
+                        content: res.data,
+                        afterClose: () => {
+                            console.log('after');
+                        },
+                    })
+                }
+            });
+        }
     }
 
     // 显示密码是明码还是暗码
