@@ -36,7 +36,7 @@ class IndexComponent extends Component {
     outLogin() {
         if (this.props.state.user.isLogin === true) {
             Modal.confirm({
-                content: '确认要删除吗？',
+                content: '确认要退出吗？',
                 confirmText: '确认',
                 onConfirm: () => {
                     let sUrl = config.baseUrl + "/api/home/user/safeout?token=" + config.token;
