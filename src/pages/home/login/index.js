@@ -72,6 +72,7 @@ class LoginIndex extends Component {
                         },
                     })
                 }
+                this.bSubmit = true;
             });
         }
     }
