@@ -21,6 +21,7 @@ const BalanceEnd = asyncComponents(() => import('./pages/home/balance/end'));
 const AddressIndex = asyncComponents(() => import('./pages/home/address/index'));
 const AddressAdd = asyncComponents(() => import('./pages/home/address/add'));
 const AddressMod = asyncComponents(() => import('./pages/home/address/mod'));
+const ProfileIndex = asyncComponents(() => import('./pages/user/profile/index'));
 
 class App extends Component {
   render() {
@@ -40,6 +41,7 @@ class App extends Component {
               <AuthRoute path={config.path + "address/index"} component={AddressIndex} ></AuthRoute>
               <AuthRoute path={config.path + "address/add"} component={AddressAdd} ></AuthRoute>
               <AuthRoute path={config.path + "address/mod"} component={AddressMod} ></AuthRoute>
+              <AuthRoute path={config.path + "profile/index"} component={ProfileIndex} ></AuthRoute>
               <Redirect to={config.path + "home/index"}></Redirect>
             </Switch>
           </Fragment>

@@ -55,6 +55,10 @@ class IndexComponent extends Component {
         }
     }
 
+    pushPage(url) {
+        this.props.history.push(config.path + url);
+    }
+
     componentWillUnmount() {
         clearInterval(this.timer);
         this.setState = (_state, _callback) => {
@@ -92,7 +96,7 @@ class IndexComponent extends Component {
                     </div>
                 </div>
                 <div className={Css["menu-list-wrap"]}>
-                    <ul>
+                    <ul onClick={this.pushPage.bind(this, 'profile/index')}>
                         <li>个人资料</li>
                         <li></li>
                     </ul>

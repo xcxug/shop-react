@@ -12,12 +12,16 @@ class SubHeader extends Component {
         }
     }
 
+    getClick() {
+        this.props['onClickRightBtn']();
+    }
+
     render() {
         return (
             <div className={Css['sub-header']}>
                 <div className={Css['back']} onClick={this.goBack.bind(this)}></div>
                 <div className={Css['title']}>{this.props.title}</div>
-                <div className={this.props['right-text'] !== '' ? Css['right-btn'] : Css['right-btn'] + " hide"}>{this.props['right-text']}</div>
+                <div className={this.props['right-text'] !== '' ? Css['right-btn'] : Css['right-btn'] + " hide"} onClick={this.getClick.bind(this)}>{this.props['right-text']}</div>
             </div>
         );
     }
