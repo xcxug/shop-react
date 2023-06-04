@@ -15,8 +15,13 @@ class ProfileIndex extends Component {
             sNickname: "昵称",
             sGender: "",
             iGender: 0,
-            sHeadName: ""
+            sHeadName: "",
+            visible: false
         }
+        this.actions = [
+            { text: '男', key: 1 },
+            { text: '女', key: 2 },
+        ]
     }
 
     componentDidMount() {
@@ -35,23 +40,8 @@ class ProfileIndex extends Component {
     }
 
     // 选择性别
-    selectGender() {
-        const BUTTONS = ['男', '女', '取消'];
-        ActionSheet.showActionSheetWithOptions({
-            options: BUTTONS,
-            cancelButtonIndex: BUTTONS.length - 1,
-            //destructiveButtonIndex: BUTTONS.length - 2,
-            title: '选择性别',
-            //message: 'I am description, description, description',
-            maskClosable: true,
-            'data-seed': 'logId',
-            onTouchStart: e => e.preventDefault()
-        },
-            (buttonIndex) => {
-                if (buttonIndex !== 2) {
-                    this.setState({ sGender: buttonIndex === 0 ? "男" : buttonIndex === 1 ? '女' : this.state.sGender, iGender: buttonIndex === 0 ? 1 : buttonIndex === 1 ? 2 : this.state.iGender });
-                }
-            });
+    selectGender(action) {
+        this.setState({ sGender: action.text, iGender: action.key, visible: false });
     }
 
     // 保存数据
@@ -126,8 +116,16 @@ class ProfileIndex extends Component {
                     </ul>
                     <ul className={Css['list']}>
                         <li>性别</li>
-                        <li><input type="text" placeholder="请选择性别" readOnly onClick={this.selectGender.bind(this)} value={this.state.sGender} /></li>
+                        <li><input type="text" placeholder="请选择性别" readOnly onClick={() => { this.setState({ visible: true }) }} value={this.state.sGender} /></li>
                         <li className={Css['arrow']}></li>
+                        <ActionSheet
+                            extra='选择性别'
+                            cancelText='取消'
+                            visible={this.state.visible}
+                            actions={this.actions}
+                            onClose={() => this.setState({ visible: false })}
+                            onAction={this.selectGender.bind(this)}
+                        />
                     </ul>
                 </div>
             </div>
