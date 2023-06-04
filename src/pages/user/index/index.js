@@ -35,21 +35,22 @@ class IndexComponent extends Component {
 
     outLogin() {
         if (this.props.state.user.isLogin === true) {
-            Modal.alert('', '确认要退出吗？', [
-                { text: '取消', onPress: () => { }, style: 'default' },
-                {
-                    text: '确认', onPress: () => {
-                        let sUrl = config.baseUrl + "/api/home/user/safeout?token=" + config.token;
-                        request(sUrl, "post", { uid: this.props.state.user.uid }).then(res => {
-                            if (res.code === 200) {
-                                this.props.dispatch(action.user.outLogin());
-                                this.props.dispatch(action.cart.clearCart());
-                                this.props.history.push(config.path + 'login/index');
-                            }
-                        });
-                    }
-                }
-            ]);
+            Modal.confirm({
+                content: '确认要删除吗？',
+                confirmText: '确认',
+                onConfirm: () => {
+                    let sUrl = config.baseUrl + "/api/home/user/safeout?token=" + config.token;
+                    request(sUrl, "post", { uid: this.props.state.user.uid }).then(res => {
+                        if (res.code === 200) {
+                            this.props.dispatch(action.user.outLogin());
+                            this.props.dispatch(action.cart.clearCart());
+                            this.props.history.push(config.path + 'login/index');
+                        }
+                    });
+                },
+                cancelText: '取消',
+                onCancel: () => { },
+            })
         } else {
             this.props.history.push(config.path + 'login/index');
         }
