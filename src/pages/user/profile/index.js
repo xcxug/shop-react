@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { ActionSheet, Toast } from 'antd-mobile';
 import config from '../../../assets/js/conf/config.js';
+import { safeAuth } from '../../../assets/js/utils/util.js';
 import { request } from '../../../assets/js/libs/request.js';
 import SubHeaderComponent from '../../../components/header/subheader';
 import Css from '../../../assets/css/user/profile/index.module.css';
@@ -9,6 +10,8 @@ import Css from '../../../assets/css/user/profile/index.module.css';
 class ProfileIndex extends Component {
     constructor(props) {
         super(props);
+
+        safeAuth(props);
 
         this.state = {
             sHead: require("../../../assets/images/user/my/default-head.png"),

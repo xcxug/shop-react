@@ -50,6 +50,7 @@ class BalanceIndex extends Component {
         let sUrl = config.baseUrl + "/api/user/address/defaultAddress?uid=" + this.props.state.user.uid + "&token=" + config.token;
         request(sUrl).then(res => {
             if (res.code === 200) {
+                localStorage['addressId'] = res.data.aid;
                 this.setState({ sName: res.data.name, sCellphone: res.data.cellphone, sProvince: res.data.province, sCity: res.data.city, sArea: res.data.area, sAddress: res.data.sAddress })
             }
         });

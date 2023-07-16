@@ -37,6 +37,10 @@ class BalanceEnd extends Component {
         }
     }
 
+    pushPage(url) {
+        this.props.history.push(config.path + url);
+    }
+
     render() {
         return (
             <div className={Css['page']}>
@@ -44,7 +48,7 @@ class BalanceEnd extends Component {
                 <div className={Css['main']}>
                     <div className={Css['list'] + " " + Css['success']}>订购成功！</div>
                     <div className={Css['list'] + " " + Css['ordernum']}>订单编号：{this.state.orderNum}</div>
-                    <div className={Css['list']}>查看订单</div>
+                    <div className={Css['list']} onClick={this.pushPage.bind(this, 'myorder/order?status=all')}>查看订单</div>
                     <div className={Css['pay-btn']}>去付款</div>
                 </div>
             </div>

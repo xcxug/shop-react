@@ -22,6 +22,8 @@ const AddressIndex = asyncComponents(() => import('./pages/home/address/index'))
 const AddressAdd = asyncComponents(() => import('./pages/home/address/add'));
 const AddressMod = asyncComponents(() => import('./pages/home/address/mod'));
 const ProfileIndex = asyncComponents(() => import('./pages/user/profile/index'));
+const MyOrder = asyncComponents(() => import('./pages/user/myorder/index'));
+const Transfer = asyncComponents(() => import('./pages/transfer/index'));
 
 class App extends Component {
   render() {
@@ -42,6 +44,8 @@ class App extends Component {
               <AuthRoute path={config.path + "address/add"} component={AddressAdd} ></AuthRoute>
               <AuthRoute path={config.path + "address/mod"} component={AddressMod} ></AuthRoute>
               <AuthRoute path={config.path + "profile/index"} component={ProfileIndex} ></AuthRoute>
+              <AuthRoute path={config.path + "myorder"} component={MyOrder} ></AuthRoute>
+              <Route path={config.path + "transfer"} component={Transfer} ></Route>
               <Redirect to={config.path + "home/index"}></Redirect>
             </Switch>
           </Fragment>
