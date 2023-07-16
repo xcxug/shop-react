@@ -102,6 +102,10 @@ class OrderPage extends Component {
         });
     }
 
+    pushPage(url) {
+        this.props.history.push(config.path + url);
+    }
+
     render() {
         return (
             <Fragment>
@@ -109,7 +113,7 @@ class OrderPage extends Component {
                     this.state.aOrder.length > 0 ?
                         this.state.aOrder.map((item, index) => {
                             return (
-                                <div className={Css['order-list']} key={index}>
+                                <div className={Css['order-list']} key={index} onClick={this.pushPage.bind(this, 'order/detail?ordernum=' + item.ordernum)}>
                                     <div className={Css['ordernum-wrap']}>
                                         <div className={Css['ordernum']}>订单编号：{item.ordernum}</div>
                                         <div className={Css['status']}>{item.status === '0' ? "待付款" : item.status === '1' ? "待收货" : item.status === '2' ? "已收货" : ''}</div>
@@ -129,7 +133,7 @@ class OrderPage extends Component {
                                     }
                                     <div className={Css['total-wrap']}>
                                         <div className={Css['total']}>实付金额：¥{item.total}</div>
-                                        {item.status !== '2' ? <div className={Css['status-btn']} onClick={item.status === '0' ? this.cancelOrder.bind(this, item.ordernum, index) : item.status === '1' ? this.firmOrder.bind(this, item.ordernum, index) : () => { }}>{item.status === '0' ? "取消订单" : item.status === '1' ? "确认收货" : ""}</div> : ""}
+                                        {item.status !== '2' ? <div className={Css['status-btn']} onClick={item.status === '0' ? (e) => { e.stopPropagation(); this.cancelOrder(item.ordernum, index) } : item.status === '1' ? (e) => { e.stopPropagation(); this.firmOrder(item.ordernum, index) } : () => { }}>{item.status === '0' ? "取消订单" : item.status === '1' ? "确认收货" : ""}</div> : ""}
                                     </div>
                                 </div>
                             )
