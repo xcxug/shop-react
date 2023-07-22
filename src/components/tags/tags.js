@@ -19,7 +19,7 @@ class TagsComponent extends Component {
         }
     }
 
-    componentWillReceiveProps(newProps) {
+    UNSAFE_componentWillReceiveProps(newProps) {
         this.setState({ status: localParam(newProps.location.search).search.status });
     }
 
