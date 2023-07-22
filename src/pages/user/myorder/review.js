@@ -62,6 +62,10 @@ class ReviewPage extends Component {
         });
     }
 
+    pushPage(url) {
+        this.props.history.push(config.path + url);
+    }
+
     render() {
         return (
             <Fragment>
@@ -69,7 +73,7 @@ class ReviewPage extends Component {
                     this.state.aOrder.length > 0 ?
                         this.state.aOrder.map((item, index) => {
                             return (
-                                <div className={Css['order-list']} key={index}>
+                                <div className={Css['order-list']} key={index} onClick={this.pushPage.bind(this, 'order/detail?ordernum=' + item.ordernum)}>
                                     <div className={Css['ordernum-wrap']}>
                                         <div className={Css['ordernum']}>订单编号：{item.ordernum}</div>
                                         <div className={Css['status']}>{item.status === '0' ? "待付款" : item.status === '1' ? "待收货" : item.status === '2' ? "已收货" : ''}</div>
