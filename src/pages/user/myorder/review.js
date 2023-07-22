@@ -86,7 +86,7 @@ class ReviewPage extends Component {
                                                         <div className={Css['image']}><img data-echo={item2.image} src={require("../../../assets/images/common/lazyImg.jpg")} alt="" /></div>
                                                         <div className={Css['title']}>{item2.title}</div>
                                                         <div className={Css['amount']}>x {item2.amount}</div>
-                                                        <div className={Css['status-btn']}>{item2.isreview === '0' ? "评价" : "追加评价"}</div>
+                                                        <div className={Css['status-btn']} onClick={(e) => { e.stopPropagation(); this.pushPage('order/add_review?gid=' + item2.gid + '&ordernum=' + item.ordernum) }}>{item2.isreview === '0' ? "评价" : "追加评价"}</div>
                                                     </div>
                                                 )
                                             })
