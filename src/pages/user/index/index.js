@@ -109,7 +109,7 @@ class IndexComponent extends Component {
                         <li>绑定手机</li>
                         <li></li>
                     </ul>
-                    <ul>
+                    <ul onClick={this.pushPage.bind(this, 'user/modpwd/index')}>
                         <li>修改密码</li>
                         <li></li>
                     </ul>
