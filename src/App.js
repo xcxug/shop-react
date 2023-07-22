@@ -27,6 +27,7 @@ const OrderDetail = asyncComponents(() => import('./pages/user/myorder/detail'))
 const AddReview = asyncComponents(() => import('./pages/user/myorder/add_review'));
 const UserAddressIndex = asyncComponents(() => import('./pages/user/address/index'));
 const UserAddressMod = asyncComponents(() => import('./pages/user/address/mod'));
+const UserMobileIndex = asyncComponents(() => import('./pages/user/mobile/index'));
 const Transfer = asyncComponents(() => import('./pages/transfer/index'));
 
 class App extends Component {
@@ -53,6 +54,7 @@ class App extends Component {
               <AuthRoute path={config.path + "order/add_review"} component={AddReview} ></AuthRoute>
               <AuthRoute path={config.path + "user/address/index"} component={UserAddressIndex} ></AuthRoute>
               <AuthRoute path={config.path + "user/address/mod"} component={UserAddressMod} ></AuthRoute>
+              <AuthRoute path={config.path + "user/mobile/index"} component={UserMobileIndex} ></AuthRoute>
               <Route path={config.path + "transfer"} component={Transfer} ></Route>
               <Redirect to={config.path + "home/index"}></Redirect>
             </Switch>
