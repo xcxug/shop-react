@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import config from '../../../assets/js/conf/config.js';
 import { Modal, Toast } from 'antd-mobile';
-import { localParam, lazyImg } from '../../../assets/js/utils/util.js';
+import { localParam, lazyImg, setScrollTop } from '../../../assets/js/utils/util.js';
 import { request } from '../../../assets/js/libs/request.js';
 import UpRefresh from '../../../assets/js/libs/uprefresh.js';
 import Css from '../../../assets/css/user/myorder/order.module.css';
@@ -22,6 +22,7 @@ class OrderPage extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getData();
     }
 

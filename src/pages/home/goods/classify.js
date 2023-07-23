@@ -5,7 +5,7 @@ import config from '../../../assets/js/conf/config.js';
 import IScroll from '../../../assets/js/libs/iscroll.js';
 import Css from '../../../assets/css/home/goods/classify.module.css';
 import { request } from "../../../assets/js/libs/request";
-import { localParam } from "../../../assets/js/utils/util";
+import { localParam, isSystem, setScrollTop } from "../../../assets/js/utils/util";
 import SearchComponent from '../../../components/search/search';
 const GoodsItems = asyncComponents(() => import('./items'));
 
@@ -23,6 +23,7 @@ class GoodsClassify extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getClassifyData();
     }
 
@@ -129,6 +130,9 @@ class GoodsClassify extends Component {
                                         )
                                     })
                                     : ""
+                            }
+                            {
+                                isSystem() === 1 ? <div style={{ width: '100%', height: '1.6rem' }}></div> : <div style={{ width: '100%', height: '0.8rem' }}></div>
                             }
                         </div>
                     </div>

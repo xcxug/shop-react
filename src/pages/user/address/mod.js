@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import config from '../../../assets/js/conf/config.js';
 import { request } from '../../../assets/js/libs/request.js';
-import { safeAuth, localParam } from '../../../assets/js/utils/util.js';
+import { safeAuth, localParam, setScrollTop } from '../../../assets/js/utils/util.js';
 import { CascadePicker, Toast, Modal } from 'antd-mobile';
 import { province } from '../../../assets/data/province.js';
 import SubHeaderComponent from '../../../components/header/subheader';
@@ -29,6 +29,7 @@ class AddressMod extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getAddress();
     }
 

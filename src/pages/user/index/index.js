@@ -6,6 +6,7 @@ import action from '../../../actions';
 import { request } from '../../../assets/js/libs/request.js';
 import SubHeaderComponent from '../../../components/header/subheader';
 import Css from '../../../assets/css/user/my/index.module.css';
+import { setScrollTop } from "../../../assets/js/utils/util";
 
 class IndexComponent extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class IndexComponent extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getUserInfo();
     }
 

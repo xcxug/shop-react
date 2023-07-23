@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import config from '../../../assets/js/conf/config.js';
 import { request } from '../../../assets/js/libs/request.js';
-import { safeAuth } from '../../../assets/js/utils/util.js';
+import { safeAuth, setScrollTop } from '../../../assets/js/utils/util.js';
 import { Modal } from 'antd-mobile';
 import SubHeaderComponent from '../../../components/header/subheader';
 import Css from '../../../assets/css/home/address/index.module.css';
@@ -19,6 +19,7 @@ class AddressIndex extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getAddress();
     }
 

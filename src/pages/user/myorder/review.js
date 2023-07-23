@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from "react-redux";
 import config from '../../../assets/js/conf/config.js';
-import { lazyImg } from '../../../assets/js/utils/util.js';
+import { lazyImg, setScrollTop } from '../../../assets/js/utils/util.js';
 import { request } from '../../../assets/js/libs/request.js';
 import Css from '../../../assets/css/user/myorder/review.module.css';
 import UpRefresh from "../../../assets/js/libs/uprefresh";
@@ -20,6 +20,7 @@ class ReviewPage extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getData();
     }
 

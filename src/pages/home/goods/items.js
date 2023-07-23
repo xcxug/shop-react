@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import config from '../../../assets/js/conf/config.js';
 import { request } from "../../../assets/js/libs/request";
 import IScroll from '../../../assets/js/libs/iscroll.js';
-import { lazyImg, localParam } from '../../../assets/js/utils/util.js';
+import { lazyImg, localParam, setScrollTop } from '../../../assets/js/utils/util.js';
 import Css from '../../../assets/css/home/goods/items.module.css';
 
 class GoodsItems extends Component {
@@ -16,6 +16,7 @@ class GoodsItems extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getData(this.props);
     }
 

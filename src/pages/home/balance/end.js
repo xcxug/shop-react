@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import Css from '../../../assets/css/home/balance/end.module.css';
 import config from "../../../assets/js/conf/config";
 import { request } from '../../../assets/js/libs/request.js';
-import { safeAuth } from '../../../assets/js/utils/util.js';
+import { safeAuth, setScrollTop } from '../../../assets/js/utils/util.js';
 import SubHeaderComponent from '../../../components/header/subheader';
 
 class BalanceEnd extends Component {
@@ -18,6 +18,7 @@ class BalanceEnd extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getOrdernum();
     }
 

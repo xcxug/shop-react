@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from "react-redux";
 import config from '../../../assets/js/conf/config.js';
-import { safeAuth } from '../../../assets/js/utils/util.js';
+import { safeAuth, setScrollTop } from '../../../assets/js/utils/util.js';
 import { request } from '../../../assets/js/libs/request.js';
 import SubHeaderComponent from '../../../components/header/subheader';
 import Css from '../../../assets/css/user/address/index.module.css';
@@ -18,6 +18,7 @@ class UserAddressIndex extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getData();
     }
 

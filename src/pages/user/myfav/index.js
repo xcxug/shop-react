@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import { Modal } from 'antd-mobile';
 import config from '../../../assets/js/conf/config.js';
-import { safeAuth, lazyImg } from '../../../assets/js/utils/util.js';
+import { safeAuth, lazyImg, setScrollTop } from '../../../assets/js/utils/util.js';
 import UpRefresh from '../../../assets/js/libs/uprefresh.js';
 import { request } from '../../../assets/js/libs/request.js';
 import SubHeaderComponent from '../../../components/header/subheader';
@@ -24,6 +24,7 @@ class MyFav extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         this.getData();
     }
 

@@ -4,7 +4,7 @@ import { Toast } from 'antd-mobile';
 import Css from '../../../assets/css/home/balance/index.module.css';
 import { request } from '../../../assets/js/libs/request.js';
 import SubHeaderComponent from '../../../components/header/subheader';
-import { safeAuth } from '../../../assets/js/utils/util.js';
+import { safeAuth, setScrollTop } from '../../../assets/js/utils/util.js';
 import config from "../../../assets/js/conf/config";
 
 class BalanceIndex extends Component {
@@ -25,6 +25,7 @@ class BalanceIndex extends Component {
     }
 
     componentDidMount() {
+        setScrollTop();
         if (sessionStorage['addressId'] !== undefined) {
             this.getSelectAddress();
         } else {

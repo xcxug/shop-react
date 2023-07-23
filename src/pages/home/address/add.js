@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from "react-redux";
 import config from '../../../assets/js/conf/config.js';
 import { request } from '../../../assets/js/libs/request.js';
-import { safeAuth } from '../../../assets/js/utils/util.js';
+import { safeAuth, setScrollTop } from '../../../assets/js/utils/util.js';
 import { CascadePicker, Toast } from 'antd-mobile';
 import { province } from '../../../assets/data/province.js';
 import SubHeaderComponent from '../../../components/header/subheader';
@@ -30,6 +30,10 @@ class AddressAdd extends Component {
 
     pushPage(url) {
         this.props.history.push(config.path + url)
+    }
+
+    componentDidMount() {
+        setScrollTop();
     }
 
     // 提交数据到后台
