@@ -6,7 +6,7 @@
   exact：完全匹配路由
 */
 import React, { Component, Fragment } from 'react';
-import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
 import { AuthRoute } from './routes/private';
 import asyncComponents from './components/async/AsyncComponent';
 import config from './assets/js/conf/config.js';
