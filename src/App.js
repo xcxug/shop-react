@@ -29,6 +29,7 @@ const UserAddressIndex = asyncComponents(() => import('./pages/user/address/inde
 const UserAddressMod = asyncComponents(() => import('./pages/user/address/mod'));
 const UserMobileIndex = asyncComponents(() => import('./pages/user/mobile/index'));
 const UserModpwdIndex = asyncComponents(() => import('./pages/user/modpwd/index'));
+const MyFav = asyncComponents(() => import('./pages/user/myfav/index'));
 const Transfer = asyncComponents(() => import('./pages/transfer/index'));
 
 class App extends Component {
@@ -57,6 +58,7 @@ class App extends Component {
               <AuthRoute path={config.path + "user/address/mod"} component={UserAddressMod} ></AuthRoute>
               <AuthRoute path={config.path + "user/mobile/index"} component={UserMobileIndex} ></AuthRoute>
               <AuthRoute path={config.path + "user/modpwd/index"} component={UserModpwdIndex} ></AuthRoute>
+              <AuthRoute path={config.path + "user/myfav/index"} component={MyFav} ></AuthRoute>
               <Route path={config.path + "transfer"} component={Transfer} ></Route>
               <Redirect to={config.path + "home/index"}></Redirect>
             </Switch>

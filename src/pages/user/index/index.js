@@ -113,7 +113,7 @@ class IndexComponent extends Component {
                         <li>修改密码</li>
                         <li></li>
                     </ul>
-                    <ul>
+                    <ul onClick={this.pushPage.bind(this, 'user/myfav/index')}>
                         <li>我的收藏</li>
                         <li></li>
                     </ul>

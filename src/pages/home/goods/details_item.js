@@ -94,12 +94,24 @@ class DetailsItem extends Component {
 
     // 加入收藏
     addFav() {
-        Toast.show({
-            content: '收藏成功！',
-            afterClose: () => {
-                console.log('after');
-            },
-        })
+        if (this.props.state.user.isLogin) {
+            let url = config.baseUrl + "/api/goods/fav?uid=" + this.props.state.user.uid + "&gid=" + this.state.gid + "&token=" + config.token;
+            request(url).then(res => {
+                Toast.show({
+                    content: res.data,
+                    afterClose: () => {
+                        console.log('after');
+                    },
+                })
+            });
+        } else {
+            Toast.show({
+                content: '请登录会员',
+                afterClose: () => {
+                    console.log('after');
+                },
+            })
+        }
     }
 
     replacePage(url) {
